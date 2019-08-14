@@ -25,76 +25,50 @@ class IndexCT extends BaseCT
         $image=Image::where("sh","checked")->get();
         $mvim=Mvim::where("sh","checked")->get();
         $news=News::where("sh","checked")->get();
-        $this->common["ad"]=$ad->implode("text","&nbsp;&nbsp;&nbsp;");
+        $this->common["ad"]=$ad->implode("text","　　");
         $this->common["image"]=$image->pluck("file");
         $this->common["news"]=$news->pluck("text");
         $this->common["mvim"]=$mvim->implode("file",",");
+
+/*         $menus=Menu::where([
+                            ["sh","=","checked"],
+                            ["parent","=","0"]
+                           ])->get();
+         $mu=[];
+         foreach($menus as $m){
+            $chk=Menu::where("parent",$m['id'])->count();
+            $su=[];
+            if($chk>0){
+                $subs=Menu::where("parent",$m['id'])->get();
+                foreach($subs as $s){
+                    $su[]=["text"=>$s['text'],"href"=>$s["href"]];
+                }
+            }
+            $mu[]=[
+                    "text"=>$m['text'],
+                    "href"=>$m['href'],
+                    "subs"=>$su,
+                ];
+         } */
+
+         $menus=Menu::where("sh","checked")->get();
+         $mu=[];
+         foreach($menus as $k=>$v){
+             if($v['parent']==0){
+                $mu[$v['id']]=["text"=>$v['text'],"href"=>$v['href']];
+             }else{
+                if(!empty($mu[$v['parent']])){
+                    $mu[$v['parent']]['subs'][]=["text"=>$v['text'],"href"=>$v['href']];
+                }
+             }
+         }
+
+         $this->common["menu"]=$mu;
+
+
+
         return view('index',$this->common);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
