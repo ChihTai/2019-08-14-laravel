@@ -42,6 +42,8 @@ class MenuCT extends BaseCT
     public function store(Request $request)
     {
       $input=$request->all();
+      $input['sh']="checked";
+      $input['parent']=0;
       Menu::create($input);
       return redirect("/admin/menu");
       

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Title;
 use App\Ad;
 use App\Mvim;
 use App\Menu;
