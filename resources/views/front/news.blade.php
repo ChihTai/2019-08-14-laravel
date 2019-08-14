@@ -3,9 +3,17 @@
     @include("front.marquee")
     <div style="height:32px; display:block;"></div>
     <!--正中央-->
+    <ol start="{{ ($news->currentPage()-1)*5+1 }}">
+    @foreach($news as $n)
+    <li class="sswww">{{mb_substr($n["text"],0,25)}}
+        <div class="all" style="display:none">{{$n['text']}}</div>
+    </li>
+    @endforeach
+
+    </ol>
     <div style="text-align:center;">
-        <a class="bl" style="font-size:30px;" href="?do=meg&p=0">&lt;&nbsp;</a>
-        <a class="bl" style="font-size:30px;" href="?do=meg&p=0">&nbsp;&gt;</a>
+    {{ $news->links() }}
+
     </div>
 </div>
 <div id="alt"
@@ -14,7 +22,7 @@
 <script>
     $(".sswww").hover(
         function () {
-            $("#alt").html("" + $(this).children(".all").html() + "").css({
+            $("#alt").html("<pre>" + $(this).children(".all").html() + "</pre>").css({
                 "top": $(this).offset().top - 50
             })
             $("#alt").show()

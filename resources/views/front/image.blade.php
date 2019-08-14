@@ -4,9 +4,16 @@
         onclick="lo(&#39;?do=admin&#39;)">管理登入</button>
     <div style="width:89%; height:480px;" class="dbor">
         <span class="t botli">校園映象區</span>
+        <div onclick="pp(1)" class="cent"><img src="{{ asset('icon/up.jpg') }}"> </div>
+    @foreach($image as $k => $i)
+        <div id="ssaa{{$k}}" class="im cent"><img src="{{asset('storage/img/'.$i)}}" alt=""></div>
+    @endforeach
+        <div onclick="pp(2)" class="cent"><img src="{{ asset('icon/dn.jpg') }}"> </div>
+
+
         <script>
             var nowpage = 0,
-                num = 0;
+                num = {{count($image)}};
 
             function pp(x) {
                 var s, t;

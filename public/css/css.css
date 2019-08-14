@@ -159,3 +159,27 @@ input:focus,button:focus
 	cursor:pointer;
 	text-decoration:none;
 }
+.im img{
+	width:150px;
+	height:103px;
+	margin:2px 0;
+	border:2px solid orange;
+}
+
+.pagination{
+	list-style: none;
+	font-size: 24px;
+	display: flex;
+	margin: auto;
+	width: 150px;
+	align-items: middle;
+}
+
+.pagination li{
+	margin:0 10px;
+	line-height:42px;
+}
+.pagination li:nth-child(1),
+.pagination li:nth-last-child(1){
+	font-size:36px;
+}
