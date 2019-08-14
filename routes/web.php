@@ -13,9 +13,7 @@
 
 //前台功能路由
 Route::get('/', "IndexCT@index");
-Route::get('/news', function () {
-  return view('index',["main"=>"news"]);
-});
+Route::get('/news', "MoreCT@index");
 Route::get('/login', function () {
   return view('index',["main"=>"login"]);
 });
