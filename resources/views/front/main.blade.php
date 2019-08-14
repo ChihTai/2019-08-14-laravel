@@ -18,9 +18,9 @@
             setInterval("ww()", 3000);
             now = 1;
         }
-
+        ww();
         function ww() {
-            $("#mwww").html("<embed loop=true src='" + lin[now] +
+            $("#mwww").html("<embed loop=true src='{{asset('storage/img')}}/" + lin[now] +
                 "' style='width:99%; height:100%;'></embed>")
             //$("#mwww").attr("src",lin[now])
             now++;
@@ -32,14 +32,21 @@
     <div
         style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
         <span class="t botli">最新消息區
-        <a href="/news">
+        <a href="/news" style="float:right;right:10px;">
         @if(count($news)>5)
-            More...
+              More...
         @endif
 
         </a>
         </span>
         <ul class="ssaa" style="list-style-type:decimal;">
+        @foreach($news->take(5) as $k => $n)
+
+        <li>{{ mb_substr($n,0,20,'utf8') }}
+            <div class="all" style="display:none">{{ $n }}</div>
+        </li>
+
+        @endforeach
         </ul>
         <div id="altt"
             style="position: absolute; width: 350px; min-height: 100px; background-color: rgb(255, 255, 204); top: 50px; left: 130px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">
